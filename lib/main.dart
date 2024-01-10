@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'recipe.dart';
+import 'recipe_detail.dart';
 
 void main() {
   runApp(const RecipeApp());
@@ -70,29 +71,29 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
             // Builds a list using ListView.
             itemCount: Recipe.samples.length,
+            // itemBuilder builds the widget tree for each row.
             itemBuilder: (BuildContext context, int index) {
-              // itemBuilder builds the widget tree for each row.
+              // Introduces a GestureDetector widget, which, as the name implies, detects gestures.
               return GestureDetector(
-                // Introduces a GestureDetector widget, which, as the name implies, detects gestures.
+                // Implements an onTap() function, which is the callback called when the widget is tapped.
+                // The Navigator widget manages a stack of pages. Calling push() with a
+                // MaterialPageRoute will push a new Material page onto the stack. Section III,
+                // “Navigating Between Screens”, will cover navigation in a lot more detail.
                 onTap: () {
-                  // Implements an onTap() function, which is the callback called when the widget is tapped.
-                  // The Navigator widget manages a stack of pages. Calling push() with a
-                  // MaterialPageRoute will push a new Material page onto the stack. Section III,
-                  // “Navigating Between Screens”, will cover navigation in a lot more detail.
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+                      // builder creates the destination page widget.
                       builder: (context) {
-                        // builder creates the destination page widget.
                         // TODO: Replace return with return RecipeDetail()
-                        return const Text('Detail Page');
+                        return RecipeDetail(recipe: Recipe.samples[index]);
                       },
                     ),
                   );
                 },
                 // GestureDetector’s child widget defines the area where the gesture is active.
-                child: buildRecipeCard(Recipe.samples[
-                    index]), // A Text widget displays the name of the recipe.
+                // A Text widget displays the name of the recipe.
+                child: buildRecipeCard(Recipe.samples[index]),
               );
             }),
       ),
@@ -101,21 +102,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildRecipeCard(Recipe recipe) {
     return Card(
-      elevation: 2.0,
       //  A card’s elevation determines how high off the screen the card is, affecting its shadow.
+      elevation: 2.0,
 
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       // shape handles the shape of the card. This code defines a rounded rectangle with a 10.0 corner radius.
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
 
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
         // The padding child is still the same vertical Column with the image and text.
+        padding: const EdgeInsets.all(16.0),
 
         child: Column(
           children: <Widget>[
             Image(image: AssetImage(recipe.imageUrl)),
+            // Between the image and text is a SizedBox. This is a blank view with a fixed size.
             const SizedBox(
-              // Between the image and text is a SizedBox. This is a blank view with a fixed size.
               height: 14.0,
             ),
             Text(
