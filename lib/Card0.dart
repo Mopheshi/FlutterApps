@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'fooderlich_theme.dart';
+
 class Card0 extends StatelessWidget {
   const Card0({super.key});
 
@@ -37,7 +39,43 @@ class Card0 extends StatelessWidget {
           // Apply a corner radius of 10 to all sides of the container.
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
-        // TODO: Add a stack of text
+        // Add a stack of text
+        child: Stack(
+          children: [
+            // The category, Editor’s Choice, stays where it is. Remember, Container already
+            // applies a padding of 16 on all sides.
+            Text(
+              category,
+              style: FooderlichTheme.darkTextTheme.bodyText1,
+            ),
+            // You place the title 20 pixels from the top.
+            Positioned(
+              top: 20,
+              child: Text(
+                title,
+                style: FooderlichTheme.darkTextTheme.headline2,
+              ),
+            ),
+            // Here, you position the description 30 pixels from the bottom and 0 to the right.
+            Positioned(
+              bottom: 30,
+              right: 0,
+              child: Text(
+                description,
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
+            ),
+            // Finally, you position the chef’s name 10 pixels from the bottom-right.
+            Positioned(
+              bottom: 10,
+              right: 0,
+              child: Text(
+                chef,
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
