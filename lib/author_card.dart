@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'circular_image.dart';
 import 'fooderlich_theme.dart';
 
-class AuthorCard extends StatelessWidget {
+class AuthorCard extends StatefulWidget {
   // AuthorCard has three properties: authorName, the author’s job title and the
   // profile image, which imageProvider handles.
   final String authorsName, title;
@@ -16,8 +16,14 @@ class AuthorCard extends StatelessWidget {
     this.imageProvider,
   });
 
-  // AuthorCard is grouped in a container and uses a Row widget to lay out the other
-  // widgets horizontally.
+  @override
+  State<AuthorCard> createState() => _AuthorCardState();
+}
+
+class _AuthorCardState extends State<AuthorCard> {
+  bool _isFavourited = false;
+
+  // AuthorCard is grouped in a container and uses a Row widget to lay out the other elements
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +36,7 @@ class AuthorCard extends StatelessWidget {
           Row(
             children: [
               CircularImage(
-                imageProvider: imageProvider,
+                imageProvider: widget.imageProvider,
                 imageRadius: 28,
               ),
               // Applies 8 pixels of padding between the image and the text.
@@ -40,11 +46,11 @@ class AuthorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    authorsName,
+                    widget.authorsName,
                     style: FooderlichTheme.lightTextTheme.headline2,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: FooderlichTheme.lightTextTheme.headline3,
                   ),
                 ],
@@ -53,16 +59,22 @@ class AuthorCard extends StatelessWidget {
           ),
           // Add IconButton
           IconButton(
-            // When the user presses the icon, display a snackbar.
+            // When the user presses the IconButton, it toggles the '_isFavorited' state via a call to setState().
             onPressed: () {
-              const snackBar =
-                  SnackBar(content: Text('Added recipe to favourites...'));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              setState(() {
+                _isFavourited = !_isFavourited;
+              });
+              // Shoq a SnackBar when IconButton is pressed
+              // const snackBar =
+              //     SnackBar(content: Text('Added recipe to favourites...'));
+              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
-            // Set the icon, size and color of the icon.
-            icon: const Icon(Icons.favorite_border),
+            // First, it checks if the user has favorited this recipe card. If true, it shows a filled
+            // heart. If false, it shows an outlined heart.
+            icon: Icon(_isFavourited ? Icons.favorite : Icons.favorite_border),
             iconSize: 30,
-            color: Colors.grey[400],
+            // It changes the color to red to give the app more life.
+            color: Colors.red[400],
           ),
         ],
       ),
