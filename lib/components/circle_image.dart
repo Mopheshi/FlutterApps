@@ -16,7 +16,8 @@ class CircleImage extends StatelessWidget {
       backgroundColor: Colors.white,
       radius: imageRadius,
       child: CircleAvatar(
-        radius: imageRadius - 5,
+        // radius: imageRadius - 5, Add an outline around the circular image element...
+        radius: imageRadius,
         backgroundImage: imageProvider,
       ),
     );
