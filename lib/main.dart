@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/core/res/colours.dart';
 
 import 'features/onboarding/views/onboarding_screen.dart';
 
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'ToDo App',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
             useMaterial3: true,
+            scaffoldBackgroundColor: Colours.darkBackground,
           ),
           home: const OnboardingScreen(),
         );

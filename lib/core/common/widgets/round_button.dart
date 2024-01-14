@@ -23,7 +23,7 @@ class RoundButton extends StatelessWidget {
           backgroundColor: Colours.light,
           minimumSize: Size(screenSize.width * 0.9, screenSize.height * 0.06),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
       child: Text(
         text,
         style: GoogleFonts.poppins(
