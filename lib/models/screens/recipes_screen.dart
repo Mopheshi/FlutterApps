@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../api/mock_fooderlich_service.dart';
+import '../../components/components.dart';
 import '../simple_recipe.dart';
 
 class RecipesScreen extends StatelessWidget {
@@ -19,9 +20,8 @@ class RecipesScreen extends StatelessWidget {
       builder: (context, AsyncSnapshot<List<SimpleRecipe>> snapShot) {
         // Check if the future is complete.
         if (snapShot.connectionState == ConnectionState.done) {
-          // TODO: Add RecipesGridView here
-          // Add a placeholder text until you build RecipesGridView.
-          return const Center(child: Text('Recipes Screen...'));
+          // Add RecipesGridView. When the list of recipes has been loaded this will display them in a grid layout.
+          return RecipesGridView(recipes: snapShot.data ?? []);
         } else {
           // Show a circular loading indicator if the future isn’t complete yet.
           return const Center(child: CircularProgressIndicator());
