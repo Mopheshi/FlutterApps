@@ -19,7 +19,10 @@ class RecipesGridView extends StatelessWidget {
         // Add SliverGridDelegateWithFixedCrossAxisCount and set the
         // crossAxisCount to 2. That means that there will be only two columns.
         gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            // Displays two items in a row
+            // const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            // Displays one item in a row
+            const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500.0),
         // For every index, fetch the recipe and create a corresponding RecipeThumbnail.
         itemBuilder: (context, index) {
           final simpleRecipe = recipes[index];

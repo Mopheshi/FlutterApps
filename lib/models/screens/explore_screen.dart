@@ -1,14 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../api/mock_fooderlich_service.dart';
 import '../../components/components.dart';
 import '../explore_data.dart';
 
-class ExploreScreen extends StatelessWidget {
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({super.key});
+
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
   // Create a MockFooderlichService, to mock server responses.
   final mockService = MockFooderlichService();
-
-  ExploreScreen({super.key});
+  late ScrollController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +34,8 @@ class ExploreScreen extends StatelessWidget {
           // list of children. In this scenario, the primary ListView will hold the other two
           // ListViews as children.
           return ListView(
+            // ScrollController, listens to scrolls and responds accordingly.
+            controller: _controller,
             // Set the scroll direction to vertical, although that’s the default value.
             scrollDirection: Axis.vertical,
             children: [
@@ -44,5 +54,35 @@ class ExploreScreen extends StatelessWidget {
         }
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // You initialize the scroll controller.
+    _controller = ScrollController();
+    // You add a listener to the controller. Every time the user scrolls, scrollListner() gets called.
+    _controller.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.removeListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    // Check the scroll offset to see if the position is greater than or equal
+    // to the maxScrollExtent. If so, the user has scrolled to the very bottom.
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      log('I am at the very bottom!');
+    }
+    // Check if the scroll offset is less than or equal to minScrollExtent. If so, the user
+    // has scrolled to the very top.
+    if (_controller.offset <= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      log('I am at the very top!');
+    }
   }
 }
