@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../components/components.dart';
 import '../models/models.dart';
@@ -21,6 +20,7 @@ class RecipesGridView extends StatelessWidget {
         top: 16,
       ),
       child: GridView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: recipes.length,
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
