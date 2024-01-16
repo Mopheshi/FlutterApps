@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/grocery_manager.dart';
 import 'empty_grocery_screen.dart';
 import 'grocery_item_screen.dart';
+import 'grocery_list_screen.dart';
 
 class GroceryScreen extends StatelessWidget {
   const GroceryScreen({super.key});
@@ -18,7 +19,8 @@ class GroceryScreen extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           // Returns the GroceryManager available in the tree.
-          final manager = Provider.of<GroceryManager>(context, listen: false);
+          final groceryManager =
+              Provider.of<GroceryManager>(context, listen: false);
           // Navigator.push() adds a new route to the stack of routes.
           Navigator.push(
             context,
@@ -31,7 +33,7 @@ class GroceryScreen extends StatelessWidget {
                 // onCreate defines what to do with the created item.
                 onCreate: (groceryItem) {
                   // addItem() adds this new grocery item to the list of items.
-                  manager.addItem(groceryItem);
+                  groceryManager.addItem(groceryItem);
                   // Once the item is added to the list, pop() removes the top navigation route item,
                   // GroceryItemScreen, to show the list of grocery items.
                   Navigator.pop(context);
@@ -55,11 +57,13 @@ class GroceryScreen extends StatelessWidget {
     // You wrap your widgets inside a Consumer, which listens for GroceryManager state changes.
     return Consumer<GroceryManager>(
       // Consumer rebuilds the widgets below itself when the grocery manager items changes.
-      builder: (context, manager, child) {
+      builder: (context, groceryManager, child) {
         // If there are grocery items in the list, show the GroceryListScreen.
-        if (manager.groceryItems.isNotEmpty) {
+        if (groceryManager.groceryItems.isNotEmpty) {
           // TODO: Add GroceryListScreen
-          return Container();
+          return GroceryListScreen(
+            groceryManager: groceryManager,
+          );
         } else {
           // If there are no grocery items, show the EmptyGroceryScreen.
           return const EmptyGroceryScreen();

@@ -42,8 +42,13 @@ class HomeState extends State<Home> {
           ),
         ),
         // Displays the correct page widget, based on the current tab index.
-        // TODO: Replace body
-        body: pages[tabManager.selectedTab],
+        // IndexedStack allows you to easily switch widgets in your app. It only shows one
+        // child widget at a time, but it preserves the state of all the children. Yes, there is a
+        // widget for that!
+        body: IndexedStack(
+          index: tabManager.selectedTab,
+          children: pages,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor:
               Theme.of(context).textSelectionTheme.selectionColor,

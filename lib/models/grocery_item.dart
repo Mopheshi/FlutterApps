@@ -13,7 +13,7 @@ class GroceryItem {
   final Importance importance;
   final Color color;
   final int quantity;
-  final DateTime dateTime;
+  final DateTime date;
   final bool isComplete;
 
   GroceryItem({
@@ -22,7 +22,7 @@ class GroceryItem {
     required this.importance,
     required this.color,
     required this.quantity,
-    required this.dateTime,
+    required this.date,
     this.isComplete = false,
   });
 
@@ -34,7 +34,7 @@ class GroceryItem {
     Importance? importance,
     Color? color,
     int? quantity,
-    DateTime? dateTime,
+    DateTime? date,
     bool? isComplete,
   }) {
     return GroceryItem(
@@ -43,7 +43,7 @@ class GroceryItem {
       importance: importance ?? this.importance,
       color: color ?? this.color,
       quantity: quantity ?? this.quantity,
-      dateTime: dateTime ?? this.dateTime,
+      date: date ?? this.date,
       isComplete: isComplete ?? this.isComplete,
     );
   }
