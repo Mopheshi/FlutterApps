@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/common/widgets/round_button.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
-import 'package:todo_app/features/authentication/views/otp_verification_screen.dart';
+import 'package:todo_app/features/authentication/controller/authentication_controller.dart';
+import 'package:todo_app/features/authentication/repository/authentication_repository.dart';
 
 import '../../../core/res/colours.dart';
 import '../../../core/res/media_res.dart';
@@ -61,11 +63,11 @@ class SignInScreen extends StatelessWidget {
               RoundButton(
                 text: 'Send Code',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const OTPVerificationScreen(),
-                    ),
+                  AuthenticationController(AuthenticationRepository(
+                    auth: FirebaseAuth.instance,
+                  )).sentOTP(
+                    context: context,
+                    phoneNumber: 'phoneNumber',
                   );
                 },
               ),
