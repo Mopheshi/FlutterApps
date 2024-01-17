@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/res/colours.dart';
+import 'package:todo_app/firebase_options.dart';
 
 import 'features/onboarding/views/onboarding_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -23,7 +29,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'ToDo App',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
             useMaterial3: true,
             scaffoldBackgroundColor: Colours.darkBackground,
           ),
