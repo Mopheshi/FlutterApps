@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../models/models.dart';
 import '../screens/screens.dart';
 
@@ -33,7 +34,7 @@ class AppRouter {
         name: 'home',
         path: '/:tab',
         builder: (context, state) {
-          final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+          final tab = int.tryParse(state.pathParameters['tab'] ?? '') ?? 0;
           return Home(
             key: state.pageKey,
             currentTab: tab,
@@ -44,7 +45,7 @@ class AppRouter {
               name: 'item',
               path: 'item/:id',
               builder: (context, state) {
-                final itemId = state.params['id'] ?? '';
+                final itemId = state.pathParameters['id'] ?? '';
                 final item = groceryManager.getGroceryItem(itemId);
                 return GroceryItemScreen(
                   originalItem: item,
@@ -60,7 +61,8 @@ class AppRouter {
               name: 'profile',
               path: 'profile',
               builder: (context, state) {
-                final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+                final tab =
+                    int.tryParse(state.pathParameters['tab'] ?? '') ?? 0;
                 return ProfileScreen(
                   user: profileManager.getUser,
                   currentTab: tab,
@@ -76,13 +78,13 @@ class AppRouter {
         ],
       ),
     ],
-    redirect: (state) {
+    redirect: (context, state) {
       final loggedIn = appStateManager.isLoggedIn;
-      final loggingIn = state.subloc == '/login';
+      final loggingIn = state.path == '/login';
       if (!loggedIn) return loggingIn ? null : '/login';
 
       final isOnboardingComplete = appStateManager.isOnboardingComplete;
-      final onboarding = state.subloc == '/onboarding';
+      final onboarding = state.path == '/onboarding';
       if (!isOnboardingComplete) {
         return onboarding ? null : '/onboarding';
       }

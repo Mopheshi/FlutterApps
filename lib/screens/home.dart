@@ -47,7 +47,7 @@ class HomeState extends State<Home> {
           Provider.of<AppStateManager>(context, listen: false).goToTab(index);
           context.goNamed(
             'home',
-            params: {
+            pathParameters: {
               'tab': '$index',
             },
           );
@@ -83,7 +83,7 @@ class HomeState extends State<Home> {
         onTap: () {
           context.goNamed(
             'profile',
-            params: {
+            pathParameters: {
               'tab': '$currentTab',
             },
           );

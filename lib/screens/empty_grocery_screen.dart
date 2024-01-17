@@ -38,7 +38,7 @@ class EmptyGroceryScreen extends StatelessWidget {
               onPressed: () {
                 context.goNamed(
                   'home',
-                  params: {
+                  pathParameters: {
                     'tab': '${FooderlichTab.recipes}',
                   },
                 );
