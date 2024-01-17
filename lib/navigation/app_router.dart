@@ -47,7 +47,7 @@ class AppRouter {
       ),
       // Add Home Route
       GoRoute(
-        name: 'tab',
+        name: 'home',
         // Defines a path with the tab parameter. The notion is a colon followed by the parameter name.
         path: '/:tab',
         builder: (context, state) {
@@ -82,6 +82,7 @@ class AppRouter {
       final loggedIn = appStateManager.isLoggedIn;
       // Checks to see if the user is at the login location.
       final loggingIn = state.subloc == '/login';
+
       // Redirects the user to log in if they haven’t yet.
       if (!loggedIn) return loggingIn ? null : '/login';
 
@@ -89,11 +90,14 @@ class AppRouter {
       final isOnboardingComplete = appStateManager.isOnboardingComplete;
       // Checks to see if the user is at the onboarding location.
       final onboarding = state.subloc == '/onboarding';
+
       // Redirects the user to 'onboarding' if they haven’t completed it yet.
       if (!isOnboardingComplete) return onboarding ? null : '/onboarding';
+
       // The user has signed in and completed onboarding. You redirect them to the home
       // page, specifically the explore tab. You’ll add the home route in a bit.
-      if (loggingIn || onboarding) return '${FooderlichTab.explore}';
+      if (loggingIn || onboarding) return '/${FooderlichTab.explore}';
+
       // Returns null to stop redirecting.
       return null;
     },

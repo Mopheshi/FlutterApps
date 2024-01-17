@@ -61,10 +61,8 @@ class LoginScreen extends StatelessWidget {
         ),
         onPressed: () async {
           // Initiate Login
-          Provider.of<AppStateManager>(context, listen: false).login(
-            'mophe',
-            'mophe',
-          );
+          Provider.of<AppStateManager>(context, listen: false)
+              .login('mockUsername', 'mockPassword');
         },
       ),
     );
