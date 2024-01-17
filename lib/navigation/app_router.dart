@@ -61,8 +61,52 @@ class AppRouter {
         },
         // Within GoRoute, it's possible to have sub-routes.
         routes: [
-          // TODO: Add Item Subroute
-          // TODO: Add Profile Subroute
+          // Add Item Subroute
+          GoRoute(
+              name: 'item',
+              // Defines a subroute item with id as a parameter.
+              path: 'item/:id',
+              builder: (context, state) {
+                // Within the builder, it attempts to extract the itemId.
+                final itemId = state.params['id'] ?? '';
+                // Gets the GroceryItem object for the itemId.
+                final groceryItem = groceryManager.getGroceryItem(itemId);
+                // Returns the GroceryItemScreen and passes in the groceryItem. Note that if the item is
+                // null, the user is creating a new item.
+                return GroceryItemScreen(
+                  originalItem: groceryItem,
+                  onCreate: (groceryItem) {
+                    // If the user creates a new item, it adds the new item to the grocery list.
+                    groceryManager.addItem(groceryItem);
+                  },
+                  onUpdate: (groceryItem) {
+                    // If the user updates an item, it updates the item in the grocery list.
+                    groceryManager.updateItem(groceryItem);
+                  },
+                );
+              }),
+          // Add Profile Subroute
+          GoRoute(
+            name: 'profile',
+            //
+            path: 'profile',
+            builder: (context, state) {
+              //
+              final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+              //
+              return ProfileScreen(
+                  user: profileManager.getUser, currentTab: tab);
+            },
+            //
+            routes: [
+              // Add Webview subroute
+              GoRoute(
+                name: 'rw',
+                path: 'rw',
+                builder: (context, state) => const WebViewScreen(),
+              ),
+            ],
+          ),
         ],
       ),
     ],
