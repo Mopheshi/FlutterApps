@@ -52,7 +52,7 @@ class HomeState extends State<Home> {
           /// goNamed performs a case-insensitive lookup by using the name parameter you
           /// set with each GoRoute. goNamed also helps you pass in parameters and query
           /// parameters to your route.
-          context.goNamed('home', params: {'tab': '$index'});
+          context.goNamed('home', pathParameters: {'tab': '$index'});
         },
         items: const [
           BottomNavigationBarItem(
@@ -84,7 +84,7 @@ class HomeState extends State<Home> {
         ),
         onTap: () {
           // Navigate to Profile Screen
-          context.goNamed('profile', params: {'tab': '$currentTab'});
+          context.goNamed('profile', pathParameters: {'tab': '$currentTab'});
         },
       ),
     );

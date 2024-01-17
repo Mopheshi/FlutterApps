@@ -51,7 +51,8 @@ class ProfileScreenState extends State<ProfileScreen> {
               await launchUrl(Uri.parse('https://www.raywenderlich.com/'));
             } else {
               // Navigate to WebView
-              context.goNamed('rw', params: {'tab': '${widget.currentTab}'});
+              context.goNamed('rw',
+                  pathParameters: {'tab': '${widget.currentTab}'});
             }
           },
         ),

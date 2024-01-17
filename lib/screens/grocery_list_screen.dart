@@ -55,7 +55,7 @@ class GroceryListScreen extends StatelessWidget {
                 // Grabs the groceryItemId for that index when the user taps a specific index in the grocery list.
                 final groceryItemId = manager.getItemId(index);
                 // Navigates from home’s To Buy tab to a specific item, specifying an itemId.
-                context.goNamed('item', params: {
+                context.goNamed('item', pathParameters: {
                   'tab': '${FooderlichTab.toBuy}',
                   'id': groceryItemId
                 });

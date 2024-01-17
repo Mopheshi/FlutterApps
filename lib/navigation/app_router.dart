@@ -52,7 +52,7 @@ class AppRouter {
         path: '/:tab',
         builder: (context, state) {
           // Gets the tab’s value from the GoRouterState params and converts it into an integer.
-          final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+          final tab = int.tryParse(state.pathParameters['tab'] ?? '') ?? 0;
           // Passes the tab to the Home widget.
           return Home(
             key: state.pageKey,
@@ -68,7 +68,7 @@ class AppRouter {
               path: 'item/:id',
               builder: (context, state) {
                 // Within the builder, it attempts to extract the itemId.
-                final itemId = state.params['id'] ?? '';
+                final itemId = state.pathParameters['id'] ?? '';
                 // Gets the GroceryItem object for the itemId.
                 final groceryItem = groceryManager.getGroceryItem(itemId);
                 // Returns the GroceryItemScreen and passes in the groceryItem. Note that if the item is
@@ -92,7 +92,7 @@ class AppRouter {
             path: 'profile',
             builder: (context, state) {
               //
-              final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+              final tab = int.tryParse(state.pathParameters['tab'] ?? '') ?? 0;
               //
               return ProfileScreen(
                   user: profileManager.getUser, currentTab: tab);
@@ -121,11 +121,11 @@ class AppRouter {
       );
     },
     // Redirect Handler
-    redirect: (state) {
+    redirect: (context, state) {
       // Checks to see if the user is logged in.
       final loggedIn = appStateManager.isLoggedIn;
       // Checks to see if the user is at the login location.
-      final loggingIn = state.subloc == '/login';
+      final loggingIn = state.path == '/login';
 
       // Redirects the user to log in if they haven’t yet.
       if (!loggedIn) return loggingIn ? null : '/login';
@@ -133,7 +133,7 @@ class AppRouter {
       // Since the user is already signed in, now you check to see if they’ve completed the onboarding guide.
       final isOnboardingComplete = appStateManager.isOnboardingComplete;
       // Checks to see if the user is at the onboarding location.
-      final onboarding = state.subloc == '/onboarding';
+      final onboarding = state.path == '/onboarding';
 
       // Redirects the user to 'onboarding' if they haven’t completed it yet.
       if (!isOnboardingComplete) return onboarding ? null : '/onboarding';
