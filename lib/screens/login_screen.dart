@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/models.dart';
 
 class LoginScreen extends StatelessWidget {
   final String? username;
@@ -19,6 +22,7 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.only(top: 44.0),
             children: [
@@ -31,9 +35,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              buildTextfield(username ?? '🍔 username'),
+              buildTextfield(username ?? '🍔 Username'),
               const SizedBox(height: 16),
-              buildTextfield('🎹 password'),
+              buildTextfield('🎹 Password'),
               const SizedBox(height: 16),
               buildButton(context),
             ],
@@ -56,7 +60,11 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () async {
-          // TODO: Initiate Login
+          // Initiate Login
+          Provider.of<AppStateManager>(context, listen: false).login(
+            'mophe',
+            'mophe',
+          );
         },
       ),
     );
