@@ -21,6 +21,8 @@ dependencies:
   pinput: ^3.0.1
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
+  flutter_riverpod: ^2.4.9
+  flutter_hooks: ^0.20.4
 
 dev_dependencies:
   flutter_test:
