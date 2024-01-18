@@ -77,7 +77,7 @@ class HomeState extends State<Home> {
         child: const CircleAvatar(
           backgroundColor: Colors.transparent,
           backgroundImage: AssetImage(
-            'assets/profile_pics/person_stef.jpeg',
+            'assets/profile_pics/atachiz.jpg',
           ),
         ),
         onTap: () {
