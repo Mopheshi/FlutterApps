@@ -6,13 +6,17 @@ part of 'recipe_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// Returns a new APIRecipeQuery class.
 APIRecipeQuery _$APIRecipeQueryFromJson(Map<String, dynamic> json) =>
     APIRecipeQuery(
+      // Maps the q key to a query field.
       query: json['q'] as String,
+      // Maps the from integer to the from field, and maps the other fields.
       from: json['from'] as int,
       to: json['to'] as int,
       more: json['more'] as bool,
       count: json['count'] as int,
+      // Maps each element of the hits list to an instance of the APIHits class.
       hits: (json['hits'] as List<dynamic>)
           .map((e) => APIHits.fromJson(e as Map<String, dynamic>))
           .toList(),
