@@ -35,11 +35,11 @@ Widget recipeCard(APIRecipe recipe) {
         const SizedBox(
           height: 8.0,
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
           child: Text(
             getCalories(recipe.calories),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 11,
             ),
