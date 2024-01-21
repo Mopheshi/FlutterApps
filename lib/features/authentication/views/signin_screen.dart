@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +10,14 @@ import 'package:todo_app/features/authentication/repository/authentication_repos
 import '../../../core/res/colours.dart';
 import '../../../core/res/media_res.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -51,6 +57,44 @@ class SignInScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colours.light,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(top: 8.0, left: 16),
+                    child: GestureDetector(
+                      onTap: () {
+                        showCountryPicker(
+                          context: context,
+                          onSelect: (code) {},
+                          countryListTheme: CountryListThemeData(
+                            backgroundColor: Colours.darkBackground,
+                            bottomSheetHeight:
+                                MediaQuery.of(context).size.height * 0.6,
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(16),
+                            ),
+                            inputDecoration: InputDecoration(
+                                hintText: 'Search country...',
+                                hintStyle: GoogleFonts.poppins(
+                                  color: Colours.lightGrey,
+                                ),
+                                border: const OutlineInputBorder(),
+                                labelText: 'Search country'),
+                            searchTextStyle:
+                                GoogleFonts.poppins(color: Colours.light),
+                            textStyle:
+                                GoogleFonts.poppins(color: Colours.light),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        '+234',
+                        style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          color: Colours.darkBackground,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 5,
