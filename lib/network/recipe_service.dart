@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 
-const String apiKey = '<Your Key>';
-const String apiId = '<your ID>';
-const String apiUrl = 'https://api.edamam.com/search';
+const String apiKey = '9482c5abb295cc499a90314717bbb5c5',
+    apiId = 'f64d30c1',
+    apiUrl = 'https://api.edamam.com/search';
 
 class RecipeService {
   Future getData(String url) async {
