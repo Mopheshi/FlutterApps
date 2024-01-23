@@ -5,6 +5,8 @@ import 'model_converter.dart';
 import 'model_response.dart';
 import 'recipe_model.dart';
 
+part 'recipe_service.chopper.dart';
+
 // We re-enter our API Key and ID.
 const String apiKey = '9482c5abb295cc499a90314717bbb5c5',
     apiId = 'f64d30c1',
@@ -40,11 +42,11 @@ abstract class RecipeService extends ChopperService {
     // Create a ChopperClient instance.
     final client = ChopperClient(
       // Pass in a base URL using the apiUrl constant.
-      baseUrl: apiUrl,
+      baseUrl: Uri.tryParse(apiUrl),
       // Pass in two interceptors. '_addQuery()' adds our key and ID to the query.
       // HttpLoggingInterceptor is part of Chopper and logs all calls. It’s handy while
       // you’re developing to see traffic between the app and the server.
-      interceptors: [_addQuery(), HttpLoggingInterceptor()],
+      interceptors: [_addQuery, HttpLoggingInterceptor()],
       // Set the converter as an instance of ModelConverter.
       converter: ModelConverter(),
       // Use the built-in JsonConverter to decode any errors.

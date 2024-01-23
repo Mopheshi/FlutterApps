@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
+
 import 'package:chopper/chopper.dart';
+
 import 'model_response.dart';
 import 'recipe_model.dart';
 
@@ -34,7 +37,8 @@ class ModelConverter implements Converter {
     return request;
   }
 
-  Response decodeJson<BodyType, InnerType>(Response response) {
+  FutureOr<Response<BodyType>> decodeJson<BodyType, InnerType>(
+      Response<dynamic> response) {
     final contentType = response.headers[contentTypeKey];
     var body = response.body;
     // Check that you’re dealing with JSON and decode the response into a string named body.
@@ -67,7 +71,8 @@ class ModelConverter implements Converter {
   }
 
   @override
-  Response<BodyType> convertResponse<BodyType, InnerType>(Response response) {
+  FutureOr<Response<BodyType>> convertResponse<BodyType, InnerType>(
+      Response<dynamic> response) {
     // This simply calls decodeJson, which we defined earlier.
     return decodeJson<BodyType, InnerType>(response);
   }
