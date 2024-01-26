@@ -4,11 +4,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'country_code_provider.g.dart';
 
 @riverpod
-class CountryCode extends _$CountryCodeProvider{
+class CountryCode extends _$CountryCode {
   @override
-  Country? build()=> null;
+  Country? build() => null;
 
-  void changeCountry(Country newCountry){
+  void changeCountry(Country newCountry) {
     state = newCountry;
   }
 }

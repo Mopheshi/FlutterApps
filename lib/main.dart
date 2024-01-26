@@ -8,6 +8,7 @@ import 'package:todo_app/firebase_options.dart';
 import 'features/onboarding/views/onboarding_screen.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
