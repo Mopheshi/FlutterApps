@@ -1,29 +1,29 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/common/widgets/round_button.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
+import 'package:todo_app/features/authentication/app/country_code_provider.dart';
 import 'package:todo_app/features/authentication/controller/authentication_controller.dart';
 import 'package:todo_app/features/authentication/repository/authentication_repository.dart';
 
 import '../../../core/res/colours.dart';
 import '../../../core/res/media_res.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide.none,
     );
+
+    final code = ref.watch(countryCodeProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -53,7 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   color: Colours.darkBackground,
                   fontWeight: FontWeight.bold,
                 ),
-                // cursorColor: Colors.blue, can be changed here or in the main.dart ThemeData...
+                readOnly: code == null,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colours.light,
@@ -63,7 +63,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       onTap: () {
                         showCountryPicker(
                           context: context,
-                          onSelect: (code) {},
+                          onSelect: (code) {
+                            ref
+                                .read(countryCodeProvider.notifier)
+                                .changeCountry(code);
+                          },
                           countryListTheme: CountryListThemeData(
                             backgroundColor: Colours.darkBackground,
                             bottomSheetHeight:
@@ -85,12 +89,22 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         );
                       },
-                      child: Text(
-                        '+234',
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: Colours.darkBackground,
-                          fontWeight: FontWeight.bold,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(top: code == null ? 6.h : 1.5.h),
+                        child: Text(
+                          code == null
+                              ? 'Pick country...'
+                              : '${code.flagEmoji} +${code.phoneCode}  ',
+                          style: GoogleFonts.poppins(
+                            fontSize: code == null ? 13 : 18,
+                            color: code == null
+                                ? Colors.lightBlue
+                                : Colours.darkBackground,
+                            fontWeight: code == null
+                                ? FontWeight.w500
+                                : FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
