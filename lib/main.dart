@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-          title: 'ToDo App',
+          title: 'Todo App',
           theme: ThemeData(
             colorScheme:
                 ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
