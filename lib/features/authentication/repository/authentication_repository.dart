@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/core/utils/core_utils.dart';
 import 'package:todo_app/features/authentication/views/otp_verification_screen.dart';
+
+final authRepoProvider = Provider((ref) => AuthenticationRepository(
+      auth: FirebaseAuth.instance,
+    ));
 
 class AuthenticationRepository {
   final FirebaseAuth auth;

@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/authentication/repository/authentication_repository.dart';
+
+final authControllerProvider = Provider((ref) => AuthenticationController(
+      ref.watch(authRepoProvider),
+    ));
 
 class AuthenticationController {
   final AuthenticationRepository repository;
