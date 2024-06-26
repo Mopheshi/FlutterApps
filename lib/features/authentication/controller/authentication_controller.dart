@@ -13,8 +13,5 @@ class AuthenticationController {
 
   Future<void> sentOTP(
           {required BuildContext context, required String phoneNumber}) async =>
-      repository.sendOTP(
-        context: context,
-        phoneNumber: phoneNumber,
-      );
+      repository.sendOTP(context: context, phoneNumber: phoneNumber);
 }

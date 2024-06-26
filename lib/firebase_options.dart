@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAVMYD9C6MY0g34gxffUe8EnFZD9oeZGIk',
-    appId: '1:177049389232:android:386db5f6a2b47775e2d375',
-    messagingSenderId: '177049389232',
-    projectId: 'todoapp-4d145',
-    storageBucket: 'todoapp-4d145.appspot.com',
+    apiKey: 'AIzaSyD9h9gHtt_rjU6-mKgAaE78Zv0LLMLNze0',
+    appId: '1:411280944752:android:90f5d0d2ffdf67ba0e4eb5',
+    messagingSenderId: '411280944752',
+    projectId: 'todo-app-a4778',
+    storageBucket: 'todo-app-a4778.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDth8gZR7vHINTZUu47mNfmHc7I2aTBKGQ',
-    appId: '1:177049389232:ios:c107561dd50d50d6e2d375',
-    messagingSenderId: '177049389232',
-    projectId: 'todoapp-4d145',
-    storageBucket: 'todoapp-4d145.appspot.com',
+    apiKey: 'AIzaSyB2wj_Q5tFpRktaBp_L6iRXlEcCehD1YzE',
+    appId: '1:411280944752:ios:135accdd62f405cc0e4eb5',
+    messagingSenderId: '411280944752',
+    projectId: 'todo-app-a4778',
+    storageBucket: 'todo-app-a4778.appspot.com',
     iosBundleId: 'morpheus.softwares.todoApp',
   );
+
 }
