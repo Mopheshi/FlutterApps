@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
 import 'package:todo_app/core/res/colours.dart';
 import 'package:todo_app/core/res/media_res.dart';
+import 'package:todo_app/features/authentication/controller/authentication_controller.dart';
 
-class OTPVerificationScreen extends StatelessWidget {
-  const OTPVerificationScreen({super.key});
+import '../../../core/utils/core_utils.dart';
+
+class OTPVerificationScreen extends ConsumerWidget {
+  final String verificationId;
+
+  const OTPVerificationScreen({super.key, required this.verificationId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -19,70 +25,15 @@ class OTPVerificationScreen extends StatelessWidget {
             children: [
               Image.asset(ImageResource.todo),
               const WhiteSpce(height: 26),
-              // Basic manual implementation of OTP TextFields with a Row...
-              // const Row(
-              //   children: [
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //     Expanded(
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           filled: true,
-              //           fillColor: Colours.light,
-              //         ),
-              //       ),
-              //     ),
-              //     WhiteSpce(width: 5),
-              //   ],
-              // ),
-              // Auto implementation of OTP TextFields with PinPut library...
               Pinput(
                 length: 6,
-                onCompleted: (pin) {
-                  // TODO: Firebase Verification
+                onCompleted: (pin) async {
+                  CoreUtils.showLoader(context);
+                  await ref.read(authControllerProvider).verifyOTP(
+                        context: context,
+                        otp: pin,
+                        verificationId: verificationId,
+                      );
                 },
                 defaultPinTheme: PinTheme(
                   padding: const EdgeInsets.symmetric(

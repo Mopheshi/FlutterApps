@@ -1,25 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'country_code_provider.dart';
+part of 'user_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$countryCodeHash() => r'86f1f57191ba83140ad171e1b928ae0291f3096d';
+String _$userHash() => r'dd75aa17733f611f3f45e28062acb73431336834';
 
-/// See also [CountryCode].
-@ProviderFor(CountryCode)
-final countryCodeProvider =
-    AutoDisposeNotifierProvider<CountryCode, Country?>.internal(
-  CountryCode.new,
-  name: r'countryCodeProvider',
+/// See also [User].
+@ProviderFor(User)
+final userProvider = AutoDisposeAsyncNotifierProvider<User, bool>.internal(
+  User.new,
+  name: r'userProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$countryCodeHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CountryCode = AutoDisposeNotifier<Country?>;
+typedef _$User = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -123,12 +123,6 @@ class SignInScreen extends HookConsumerWidget {
               RoundButton(
                 text: 'Send Code',
                 onPressed: () async {
-                  // AuthenticationController(AuthenticationRepository(
-                  //   auth: FirebaseAuth.instance,
-                  // )).sentOTP(
-                  //   context: context,
-                  //   phoneNumber: 'phoneNumber',
-                  // );
                   if (code == null) return;
                   final navigator = Navigator.of(context);
                   CoreUtils.showLoader(context);
@@ -137,7 +131,6 @@ class SignInScreen extends HookConsumerWidget {
                         phoneNumber:
                             '+${code.phoneCode}${phoneController.text}',
                       );
-
                   navigator.pop();
                 },
               ),

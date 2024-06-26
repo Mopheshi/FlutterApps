@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/res/colours.dart';
+import 'package:todo_app/features/authentication/app/user_provider.dart';
 import 'package:todo_app/firebase_options.dart';
 
 import 'features/onboarding/views/onboarding_screen.dart';
+import 'features/todo/views/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +18,11 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenSize = MediaQuery.of(context).size;
     debugPrint(screenSize.toString());
     return ScreenUtilInit(
@@ -36,7 +38,25 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             scaffoldBackgroundColor: Colours.darkBackground,
           ),
-          home: const OnboardingScreen(),
+          home: ref.watch(userProvider).when(
+                data: (userExists) {
+                  if (userExists) {
+                    return const HomeScreen();
+                  } else {
+                    return const OnboardingScreen();
+                  }
+                },
+                error: (error, stackTrace) {
+                  debugPrint('ERROR: $error');
+                  debugPrint(stackTrace.toString());
+                  return const OnboardingScreen();
+                },
+                loading: () => const Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
         );
       },
     );
