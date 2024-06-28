@@ -20,15 +20,15 @@ class DBHelper {
     // Create the tasks table
     await database.execute('''
       CREATE TABLE IF NOT EXISTS tasks(
-        id INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 0,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         title STRING,
         description TEXT,
         date STRING,
         startTime STRING,
         endTime STRING,
-        reminder INTEGER DEFAULT 0,
-        repeat STRING,
-        isCompleted INTEGER DEFAULT 0
+        reminder INTEGER,
+        repeat INTEGER,
+        isCompleted INTEGER
       )
     ''');
   }
@@ -85,7 +85,7 @@ class DBHelper {
   }
 
   /// Updates a task in the database
-  static Future<void> updateTask(int taskId, {required TaskModel task}) async {
+  static Future<void> updateTask(TaskModel task) async {
     final localDB = await db();
 
     await localDB.update(

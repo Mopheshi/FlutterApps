@@ -14,7 +14,7 @@ class TaskDate extends _$TaskDate {
 
   String? date() {
     if (state == null) return null;
-    return DateFormat("dd/MM/yyyy").format(state!);
+    return DateFormat("dd-MM-yyyy").format(state!);
   }
 
   void reset() => state = null;

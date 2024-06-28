@@ -10,6 +10,9 @@ import 'package:todo_app/core/common/widgets/white_space.dart';
 import 'package:todo_app/core/res/colours.dart';
 import 'package:todo_app/core/utils/core_utils.dart';
 import 'package:todo_app/features/todo/app/task_date_provider.dart';
+import 'package:todo_app/features/todo/app/task_provider.dart';
+
+import '../models/task_model.dart';
 
 class AddTaskScreen extends HookConsumerWidget {
   const AddTaskScreen({super.key});
@@ -146,24 +149,32 @@ class AddTaskScreen extends HookConsumerWidget {
             ),
             const WhiteSpace(height: 20),
             RoundButton(
-              onPressed: () {
+              onPressed: () async {
                 final title = titleContoller.text.trim(),
                     description = descriptionContoller.text.trim(),
                     date = dateProvider,
                     startTime = startTimeProvider,
                     endTime = endTimeProvider;
+                final navigator = Navigator.of(context);
 
                 if (title.isNotEmpty &&
                     description.isNotEmpty &&
                     date != null &&
                     startTime != null &&
                     endTime != null) {
-                  debugPrint("Title: $title");
-                  debugPrint("Description: $description");
-                  debugPrint("Date: $date");
-                  debugPrint("Start Time: $startTime");
-                  debugPrint("End Time: $endTime");
-                  // TODO: Add task to database
+                  CoreUtils.showLoader(context);
+
+                  await ref.read(taskProvider.notifier).addTask(TaskModel(
+                        title: title,
+                        description: description,
+                        date: date,
+                        startTime: startTime,
+                        endTime: endTime,
+                      ));
+
+                  navigator
+                    ..pop()
+                    ..pop();
                 } else {
                   CoreUtils.showSnackBar(
                     context: context,

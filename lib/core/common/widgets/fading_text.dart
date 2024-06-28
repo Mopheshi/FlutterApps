@@ -6,7 +6,7 @@ import '../../res/colours.dart';
 class FadingText extends StatelessWidget {
   final String text;
   final double fontSize;
-  final FontWeight fontWeight;
+  final FontWeight? fontWeight;
   final color;
   final TextAlign? textAlign;
 
@@ -14,7 +14,7 @@ class FadingText extends StatelessWidget {
     this.text, {
     super.key,
     required this.fontSize,
-    required this.fontWeight,
+    this.fontWeight,
     this.color,
     this.textAlign,
   });

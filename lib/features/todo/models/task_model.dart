@@ -6,7 +6,7 @@ class TaskModel {
   DateTime? date;
   DateTime? startTime;
   DateTime? endTime;
-  bool remind;
+  bool reminder;
   bool repeat;
 
   TaskModel({
@@ -17,7 +17,7 @@ class TaskModel {
     this.date,
     this.startTime,
     this.endTime,
-    this.remind = false,
+    this.reminder = false,
     this.repeat = true,
   });
 
@@ -30,7 +30,7 @@ class TaskModel {
       date: DateTime.parse(map['date'] as String),
       startTime: DateTime.parse(map['startTime'] as String),
       endTime: DateTime.parse(map['endTime'] as String),
-      remind: (map['remind'] as num) == 1,
+      reminder: (map['reminder'] as num) == 1,
       repeat: (map['repeat'] as num) == 1,
     );
   }
@@ -43,7 +43,7 @@ class TaskModel {
         'date': date.toString(),
         'startTime': startTime.toString(),
         'endTime': endTime.toString(),
-        'remind': remind ? 1 : 0,
+        'reminder': reminder ? 1 : 0,
         'repeat': repeat ? 1 : 0,
       };
 }
