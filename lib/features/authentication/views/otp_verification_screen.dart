@@ -24,7 +24,7 @@ class OTPVerificationScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(ImageResource.todo),
-              const WhiteSpce(height: 26),
+              const WhiteSpace(height: 26),
               Pinput(
                 length: 6,
                 onCompleted: (pin) async {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class WhiteSpce extends StatelessWidget {
+class WhiteSpace extends StatelessWidget {
   final double? width, height;
 
-  const WhiteSpce({
+  const WhiteSpace({
     super.key,
     this.width,
     this.height,

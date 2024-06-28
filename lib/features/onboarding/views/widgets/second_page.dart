@@ -17,7 +17,7 @@ class SecondPage extends StatelessWidget {
         children: [
           // Spacer(),
           Image.asset(ImageResource.todo),
-          const WhiteSpce(height: 50),
+          const WhiteSpace(height: 50),
           RoundButton(
             text: 'Login with Phone',
             onPressed: () {

@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todo_app/core/common/widgets/filled_field.dart';
 import 'package:todo_app/core/common/widgets/round_button.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
 import 'package:todo_app/core/utils/core_utils.dart';
@@ -18,11 +19,6 @@ class SignInScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide.none,
-    );
-
     final phoneController = useTextEditingController();
     final code = ref.watch(countryCodeProvider);
 
@@ -36,7 +32,7 @@ class SignInScreen extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             children: [
               Image.asset(ImageResource.todo),
-              const WhiteSpce(height: 20),
+              const WhiteSpace(height: 20),
               Text(
                 'Please enter your phone number to get the verification code...',
                 textAlign: TextAlign.center,
@@ -46,80 +42,62 @@ class SignInScreen extends HookConsumerWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const WhiteSpce(height: 20),
-              TextField(
+              const WhiteSpace(height: 20),
+              FilledField(
                 keyboardType: TextInputType.phone,
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  color: Colours.darkBackground,
-                  fontWeight: FontWeight.bold,
-                ),
                 controller: phoneController,
                 readOnly: code == null,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colours.light,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(top: 8.0, left: 16),
-                    child: GestureDetector(
-                      onTap: () {
-                        showCountryPicker(
-                          context: context,
-                          onSelect: (code) {
-                            ref
-                                .read(countryCodeProvider.notifier)
-                                .changeCountry(code);
-                          },
-                          countryListTheme: CountryListThemeData(
-                            backgroundColor: Colours.darkBackground,
-                            bottomSheetHeight:
-                                MediaQuery.of(context).size.height * 0.6,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(16),
-                            ),
-                            inputDecoration: InputDecoration(
-                                hintText: 'Search country...',
-                                hintStyle: GoogleFonts.poppins(
-                                  color: Colours.lightGrey,
-                                ),
-                                border: const OutlineInputBorder(),
-                                labelText: 'Search country'),
-                            searchTextStyle:
-                                GoogleFonts.poppins(color: Colours.light),
-                            textStyle:
-                                GoogleFonts.poppins(color: Colours.light),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        onSelect: (code) {
+                          ref
+                              .read(countryCodeProvider.notifier)
+                              .changeCountry(code);
+                        },
+                        countryListTheme: CountryListThemeData(
+                          backgroundColor: Colours.darkBackground,
+                          bottomSheetHeight:
+                              MediaQuery.of(context).size.height * 0.6,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(16),
                           ),
-                        );
-                      },
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(top: code == null ? 6.h : 1.5.h),
-                        child: Text(
-                          code == null
-                              ? 'Pick country...'
-                              : '${code.flagEmoji} +${code.phoneCode}  ',
-                          style: GoogleFonts.poppins(
-                            fontSize: code == null ? 13 : 18,
-                            color: code == null
-                                ? Colors.lightBlue
-                                : Colours.darkBackground,
-                            fontWeight: code == null
-                                ? FontWeight.w500
-                                : FontWeight.bold,
-                          ),
+                          inputDecoration: InputDecoration(
+                              hintText: 'Search country...',
+                              hintStyle: GoogleFonts.poppins(
+                                color: Colours.lightGrey,
+                              ),
+                              border: const OutlineInputBorder(),
+                              labelText: 'Search country'),
+                          searchTextStyle:
+                              GoogleFonts.poppins(color: Colours.light),
+                          textStyle: GoogleFonts.poppins(color: Colours.light),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(top: code == null ? 6.h : 1.5.h),
+                      child: Text(
+                        code == null
+                            ? 'Pick country...'
+                            : '${code.flagEmoji} +${code.phoneCode}  ',
+                        style: GoogleFonts.poppins(
+                          fontSize: code == null ? 13 : 18,
+                          color: code == null
+                              ? Colors.lightBlue
+                              : Colours.darkBackground,
+                          fontWeight:
+                              code == null ? FontWeight.w500 : FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 5,
-                  ),
-                  focusedBorder: border,
-                  enabledBorder: border,
                 ),
               ),
-              const WhiteSpce(height: 30),
+              const WhiteSpace(height: 30),
               RoundButton(
                 text: 'Send Code',
                 onPressed: () async {

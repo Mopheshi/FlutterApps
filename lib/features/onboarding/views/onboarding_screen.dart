@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             size: 30,
                             color: Colours.light,
                           ),
-                          WhiteSpce(width: 5),
+                          WhiteSpace(width: 5),
                           FadingText(
                             'Skip',
                             fontSize: 16,

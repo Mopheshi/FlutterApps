@@ -17,14 +17,14 @@ class FirstPage extends StatelessWidget {
         children: [
           // Spacer(),
           Image.asset(ImageResource.todo),
-          const WhiteSpce(height: 100),
+          const WhiteSpace(height: 100),
           const FadingText(
             'ToDo with Riverpod',
             textAlign: TextAlign.center,
             fontSize: 30,
             fontWeight: FontWeight.w500,
           ),
-          const WhiteSpce(height: 10),
+          const WhiteSpace(height: 10),
           Text(
             'Welcome!!! Do you want to clear tasks super fast with ToDo?',
             textAlign: TextAlign.center,
