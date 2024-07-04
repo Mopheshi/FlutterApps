@@ -23,7 +23,8 @@ class TasksForTomorrow extends ConsumerWidget {
           final colour = Colours.randomColour();
           return TaskExpansionTile(
             title: "Tomorrow's Tasks",
-            subtitle: "Tomorrow's tasks are shown here",
+            subtitle: "Tomorrow's tasks are shown here...",
+            colour: colour,
             chilren: snapshot.data!.map((task) {
               final isLast = snapshot.data!
                       .indexWhere((element) => element.id == task.id) ==

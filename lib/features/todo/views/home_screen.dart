@@ -94,7 +94,7 @@ class HomeScreen extends HookWidget {
                 const WhiteSpace(height: 20),
                 const FilledField(
                   prefixIcon: Icon(AntDesign.search1),
-                  hintText: 'Search',
+                  hintText: 'Search...',
                   suffixIcon: Icon(
                     FontAwesome.sliders,
                     color: Colours.lightGrey,
@@ -106,89 +106,92 @@ class HomeScreen extends HookWidget {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  FontAwesome.tasks,
-                  size: 20,
-                  color: Colours.light,
-                ),
-                const WhiteSpace(width: 10),
-                Text(
-                  "Today's Tasks",
-                  style: GoogleFonts.poppins(
+        child: Padding(
+          padding: EdgeInsets.only(top: 25.h),
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    FontAwesome.tasks,
+                    size: 20,
                     color: Colours.light,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-              ],
-            ),
-            const WhiteSpace(height: 25),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: ColoredBox(
-                color: Colours.light,
-                child: TabBar(
-                  controller: tabController,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: BoxDecoration(
-                    color: Colours.lightGrey,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  labelPadding: EdgeInsets.zero,
-                  isScrollable: false,
-                  labelColor: Colors.lightBlue,
-                  labelStyle: GoogleFonts.poppins(
-                    fontSize: 24,
-                    color: Colors.lightBlue,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  unselectedLabelColor: Colours.light,
-                  tabs: [
-                    Tab(
-                      child: SizedBox(
-                        width: screenWidth * 0.5,
-                        child: Center(
-                          child: Text("Pending", style: tabTextStyle),
-                        ),
-                      ),
+                  const WhiteSpace(width: 10),
+                  Text(
+                    "Today's Tasks",
+                    style: GoogleFonts.poppins(
+                      color: Colours.light,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Tab(
-                      child: SizedBox(
-                        width: screenWidth * 0.5,
-                        child: Center(
-                          child: Text("Completed", style: tabTextStyle),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-            const WhiteSpace(height: 20),
-            SizedBox(
-              height: screenHeight * 0.26,
-              child: ClipRRect(
+              const WhiteSpace(height: 25),
+              ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: TabBarView(
-                  controller: tabController,
-                  children: const [
-                    ActiveTasks(),
-                    CompletedTasks(),
-                  ],
+                child: ColoredBox(
+                  color: Colours.light,
+                  child: TabBar(
+                    controller: tabController,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicator: BoxDecoration(
+                      color: Colours.lightGrey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    labelPadding: EdgeInsets.zero,
+                    isScrollable: false,
+                    labelColor: Colors.lightBlue,
+                    labelStyle: GoogleFonts.poppins(
+                      fontSize: 24,
+                      color: Colors.lightBlue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    unselectedLabelColor: Colours.light,
+                    tabs: [
+                      Tab(
+                        child: SizedBox(
+                          width: screenWidth * 0.5,
+                          child: Center(
+                            child: Text("Pending", style: tabTextStyle),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: SizedBox(
+                          width: screenWidth * 0.5,
+                          child: Center(
+                            child: Text("Completed", style: tabTextStyle),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const WhiteSpace(height: 20),
-            const TasksForTomorrow(),
-            const WhiteSpace(height: 20),
-            const TasksForDayAfterTomorrow(),
-          ],
+              const WhiteSpace(height: 20),
+              SizedBox(
+                height: screenHeight * 0.26,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: TabBarView(
+                    controller: tabController,
+                    children: const [
+                      ActiveTasks(),
+                      CompletedTasks(),
+                    ],
+                  ),
+                ),
+              ),
+              const WhiteSpace(height: 20),
+              const TasksForTomorrow(),
+              const WhiteSpace(height: 20),
+              const TasksForDayAfterTomorrow(),
+            ],
+          ),
         ),
       ),
     );
