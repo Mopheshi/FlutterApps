@@ -18,26 +18,8 @@ class ActiveTasks extends ConsumerWidget {
     return FutureBuilder<List<TaskModel>>(
       future: TodoUtils.getActiveTasksForToday(tasks),
       builder: (_, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              'An error occurred: ${snapshot.error}',
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colours.light,
-              ),
-            ),
-          );
-        }
-
-        if (snapshot.hasData) {
-          final tasks = snapshot.data!; // Now it's safe to use !
-          if (tasks.isEmpty) {
+        if (snapshot.hasData && snapshot.data != null) {
+          if (snapshot.data!.isEmpty) {
             return Center(
               child: Text(
                 'Yay! No pending tasks for today...',
@@ -52,11 +34,16 @@ class ActiveTasks extends ConsumerWidget {
             return ColoredBox(
               color: Colours.lightBackground,
               child: ListView.builder(
-                itemCount: tasks.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (_, index) {
-                  final task = tasks[index];
+                  final task = snapshot.data![index];
+                  final isLast = index == snapshot.data!.length - 1;
                   return TodoTile(
                     task: task,
+                    bottomMargin: isLast ? null : 10,
+                    onDelete: () {
+                      ref.read(taskProvider.notifier).deleteTask(task.id!);
+                    },
                     endIcon: Switch(
                       value: task.isCompleted,
                       onChanged: (value) {

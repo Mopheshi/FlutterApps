@@ -10,16 +10,19 @@ import 'package:todo_app/core/res/colours.dart';
 import '../models/task_model.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile(
-      {super.key,
-      required this.task,
-      this.onEdit,
-      this.onDelete,
-      required this.endIcon});
+  const TodoTile({
+    super.key,
+    required this.task,
+    this.onEdit,
+    this.onDelete,
+    this.bottomMargin,
+    required this.endIcon,
+  });
 
   final TaskModel task;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final double? bottomMargin;
   final Widget endIcon;
 
   @override

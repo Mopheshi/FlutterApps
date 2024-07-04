@@ -12,6 +12,8 @@ import '../../../core/helper/db_helper.dart';
 import '../../../core/res/colours.dart';
 import '../../authentication/views/signin_screen.dart';
 import '../widgets/completed_tasks.dart';
+import '../widgets/tasks_for_day_after_tomorrow.dart';
+import '../widgets/tasks_for_tomorrow.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -182,6 +184,10 @@ class HomeScreen extends HookWidget {
                 ),
               ),
             ),
+            const WhiteSpace(height: 20),
+            const TasksForTomorrow(),
+            const WhiteSpace(height: 20),
+            const TasksForDayAfterTomorrow(),
           ],
         ),
       ),
