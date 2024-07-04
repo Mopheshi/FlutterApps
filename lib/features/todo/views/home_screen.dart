@@ -11,6 +11,7 @@ import 'package:todo_app/features/todo/widgets/active_tasks.dart';
 import '../../../core/helper/db_helper.dart';
 import '../../../core/res/colours.dart';
 import '../../authentication/views/signin_screen.dart';
+import '../widgets/completed_tasks.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -176,7 +177,7 @@ class HomeScreen extends HookWidget {
                   controller: tabController,
                   children: const [
                     ActiveTasks(),
-                    ColoredBox(color: Colors.blue),
+                    CompletedTasks(),
                   ],
                 ),
               ),

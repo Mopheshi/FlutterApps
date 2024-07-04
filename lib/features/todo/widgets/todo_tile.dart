@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/common/widgets/fading_text.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
@@ -9,9 +10,17 @@ import 'package:todo_app/core/res/colours.dart';
 import '../models/task_model.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({super.key, required this.task});
+  const TodoTile(
+      {super.key,
+      required this.task,
+      this.onEdit,
+      this.onDelete,
+      required this.endIcon});
 
   final TaskModel task;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final Widget endIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +60,10 @@ class TodoTile extends StatelessWidget {
                       Row(
                         children: [
                           Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 15.w,
+                              vertical: 3.h,
+                            ),
                             decoration: BoxDecoration(
                               color: Colours.darkBackground,
                               border: Border.all(
@@ -61,20 +74,36 @@ class TodoTile extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '${task.startTime!.timeOnly} | ${task.endTime!.timeOnly}',
+                                '${task.startTime!.timeOnly} | '
+                                '${task.endTime!.timeOnly}',
                                 style: GoogleFonts.poppins(
                                   color: Colours.light,
                                   fontSize: 12,
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          const WhiteSpace(width: 20),
+                          IconButton(
+                              onPressed: onEdit,
+                              icon: const Icon(
+                                MaterialCommunityIcons.circle_edit_outline,
+                                color: Colours.light,
+                              )),
+                          const WhiteSpace(width: 20),
+                          IconButton(
+                            onPressed: onDelete,
+                            icon: const Icon(
+                                MaterialCommunityIcons.delete_circle),
+                            color: Colours.light,
+                          ),
                         ],
                       )
                     ],
                   )
                 ],
-              )
+              ),
+              endIcon,
             ],
           ),
         ),
