@@ -39,27 +39,31 @@ class ActiveTasks extends ConsumerWidget {
                 itemBuilder: (_, index) {
                   final task = snapshot.data![index];
                   final isLast = index == snapshot.data!.length - 1;
-                  return TodoTile(
-                    task,
-                    bottomMargin: isLast ? null : 10,
-                    onDelete: () {
-                      ref.read(taskProvider.notifier).deleteTask(task.id!);
-                    },
-                    onEdit: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => AddOrEditTaskScreen(task: task),
-                      ),
-                    );
-                  },
-                    endIcon: Switch(
-                      value: task.isCompleted,
-                      onChanged: (value) {
-                        task.isCompleted = true;
-                        ref.read(taskProvider.notifier).markAsCompleted(task);
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TodoTile(
+                      task,
+                      bottomMargin: isLast ? null : 10,
+                      onDelete: () {
+                        ref.read(taskProvider.notifier).deleteTask(task.id!);
                       },
-                      // activeColor: Colours.primary,
+                      onEdit: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => AddOrEditTaskScreen(task: task),
+                          ),
+                        );
+                      },
+                      endIcon: Switch(
+                        value: task.isCompleted,
+                        onChanged: (value) {
+                          task.isCompleted = true;
+                          ref.read(taskProvider.notifier).markAsCompleted(task);
+                        },
+                        // activeColor: Colours.primary,
+                      ),
                     ),
                   );
                 },

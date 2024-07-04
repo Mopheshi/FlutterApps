@@ -41,24 +41,27 @@ class CompletedTasks extends ConsumerWidget {
                 itemBuilder: (_, index) {
                   final task = snapshot.data![index];
                   final isLast = index == snapshot.data!.length - 1;
-                  return TodoTile(
-                      task,
-                      bottomMargin: isLast ? null : 10,
-                      onDelete: () {
-                        ref.read(taskProvider.notifier).deleteTask(task.id!);
-                      },
-                      onEdit: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => AddOrEditTaskScreen(task: task),
-                          ),
-                        );
-                      },
-                      endIcon: const Icon(
-                        AntDesign.checkcircle,
-                        color: Colours.green,
-                      ));
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TodoTile(
+                        task,
+                        bottomMargin: isLast ? null : 10,
+                        onDelete: () {
+                          ref.read(taskProvider.notifier).deleteTask(task.id!);
+                        },
+                        onEdit: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AddOrEditTaskScreen(task: task),
+                            ),
+                          );
+                        },
+                        endIcon: const Icon(
+                          AntDesign.checkcircle,
+                          color: Colours.green,
+                        )),
+                  );
                 },
               ),
             );

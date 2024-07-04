@@ -29,28 +29,31 @@ class TasksForTomorrow extends ConsumerWidget {
               final isLast = snapshot.data!
                       .indexWhere((element) => element.id == task.id) ==
                   snapshot.data!.length - 1;
-              return TodoTile(
-                task,
-                colour: colour,
-                bottomMargin: isLast ? null : 10,
-                onEdit: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => AddOrEditTaskScreen(task: task),
-                    ),
-                  );
-                },
-                onDelete: () {
-                  ref.read(taskProvider.notifier).deleteTask(task.id!);
-                },
-                endIcon: Switch(
-                  value: task.isCompleted,
-                  onChanged: (_) async {
-                    task.isCompleted = true;
-                    await ref.read(taskProvider.notifier).markAsCompleted(task);
-                    // NotificationService.cancelNotification(task.id!);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TodoTile(
+                  task,
+                  colour: colour,
+                  bottomMargin: isLast ? null : 10,
+                  onEdit: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AddOrEditTaskScreen(task: task),
+                      ),
+                    );
                   },
+                  onDelete: () {
+                    ref.read(taskProvider.notifier).deleteTask(task.id!);
+                  },
+                  endIcon: Switch(
+                    value: task.isCompleted,
+                    onChanged: (_) async {
+                      task.isCompleted = true;
+                      await ref.read(taskProvider.notifier).markAsCompleted(task);
+                      // NotificationService.cancelNotification(task.id!);
+                    },
+                  ),
                 ),
               );
             }).toList(),

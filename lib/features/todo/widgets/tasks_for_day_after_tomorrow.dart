@@ -7,6 +7,7 @@ import 'package:todo_app/features/todo/utils/todo_utils.dart';
 import 'package:todo_app/features/todo/widgets/task_expansion_tile.dart';
 import 'package:todo_app/features/todo/widgets/todo_tile.dart';
 
+import '../../../core/services/notification_service.dart';
 import '../models/task_model.dart';
 import '../views/add_or_edit_task_screen.dart';
 
@@ -30,28 +31,33 @@ class TasksForDayAfterTomorrow extends ConsumerWidget {
               final isLast = snapshot.data!
                       .indexWhere((element) => element.id == task.id) ==
                   snapshot.data!.length - 1;
-              return TodoTile(
-                task,
-                colour: colour,
-                bottomMargin: isLast ? null : 10,
-                onEdit: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => AddOrEditTaskScreen(task: task),
-                    ),
-                  );
-                },
-                onDelete: () {
-                  ref.read(taskProvider.notifier).deleteTask(task.id!);
-                },
-                endIcon: Switch(
-                  value: task.isCompleted,
-                  onChanged: (_) async {
-                    task.isCompleted = true;
-                    await ref.read(taskProvider.notifier).markAsCompleted(task);
-                    // NotificationService.cancelNotification(task.id!);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TodoTile(
+                  task,
+                  colour: colour,
+                  bottomMargin: isLast ? null : 10,
+                  onEdit: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AddOrEditTaskScreen(task: task),
+                      ),
+                    );
                   },
+                  onDelete: () {
+                    ref.read(taskProvider.notifier).deleteTask(task.id!);
+                  },
+                  endIcon: Switch(
+                    value: task.isCompleted,
+                    onChanged: (_) async {
+                      task.isCompleted = true;
+                      await ref
+                          .read(taskProvider.notifier)
+                          .markAsCompleted(task);
+                      NotificationService.cancelNotification(task.id!);
+                    },
+                  ),
                 ),
               );
             }).toList(),
