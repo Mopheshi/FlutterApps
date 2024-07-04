@@ -9,6 +9,7 @@ class FadingText extends StatelessWidget {
   final FontWeight? fontWeight;
   final color;
   final TextAlign? textAlign;
+  final TextOverflow? overflow;
 
   const FadingText(
     this.text, {
@@ -17,6 +18,7 @@ class FadingText extends StatelessWidget {
     this.fontWeight,
     this.color,
     this.textAlign,
+    this.overflow,
   });
 
   @override

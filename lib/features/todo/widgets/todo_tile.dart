@@ -10,13 +10,14 @@ import 'package:todo_app/core/res/colours.dart';
 import '../models/task_model.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({
+  const TodoTile(
+    this.task, {
     super.key,
-    required this.task,
     this.onEdit,
     this.onDelete,
     this.bottomMargin,
     required this.endIcon,
+    this.colour,
   });
 
   final TaskModel task;
@@ -24,6 +25,7 @@ class TodoTile extends StatelessWidget {
   final VoidCallback? onDelete;
   final double? bottomMargin;
   final Widget endIcon;
+  final Color? colour;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class TodoTile extends StatelessWidget {
                     height: 80.h,
                     width: 5.w,
                     decoration: BoxDecoration(
-                      color: Colours.randomColour(),
+                      color: colour ?? Colours.randomColour(),
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
@@ -58,7 +60,11 @@ class TodoTile extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       const WhiteSpace(height: 3),
-                      FadingText(task.description!, fontSize: 12),
+                      FadingText(
+                        task.description!,
+                        fontSize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       const WhiteSpace(height: 10),
                       Row(
                         children: [

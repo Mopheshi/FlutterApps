@@ -7,6 +7,7 @@ import 'package:todo_app/features/todo/utils/todo_utils.dart';
 import 'package:todo_app/features/todo/widgets/todo_tile.dart';
 
 import '../models/task_model.dart';
+import '../views/add_or_edit_task_screen.dart';
 
 class ActiveTasks extends ConsumerWidget {
   const ActiveTasks({super.key});
@@ -39,11 +40,19 @@ class ActiveTasks extends ConsumerWidget {
                   final task = snapshot.data![index];
                   final isLast = index == snapshot.data!.length - 1;
                   return TodoTile(
-                    task: task,
+                    task,
                     bottomMargin: isLast ? null : 10,
                     onDelete: () {
                       ref.read(taskProvider.notifier).deleteTask(task.id!);
                     },
+                    onEdit: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AddOrEditTaskScreen(task: task),
+                      ),
+                    );
+                  },
                     endIcon: Switch(
                       value: task.isCompleted,
                       onChanged: (value) {

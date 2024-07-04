@@ -5,7 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/common/widgets/filled_field.dart';
 import 'package:todo_app/core/common/widgets/white_space.dart';
-import 'package:todo_app/features/todo/views/add_task_screen.dart';
+import 'package:todo_app/features/todo/views/add_or_edit_task_screen.dart';
 import 'package:todo_app/features/todo/widgets/active_tasks.dart';
 
 import '../../../core/helper/db_helper.dart';
@@ -74,7 +74,7 @@ class HomeScreen extends HookWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const AddTaskScreen(),
+                            builder: (_) => const AddOrEditTaskScreen(),
                           ),
                         );
                       },
